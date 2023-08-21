@@ -24,8 +24,8 @@ class Product(models.Model):
 
 
 class ProductsImages(models.Model):
-    pass
-
+    product = models.ForeignKey(Product , related_name="product_image" , on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="product_image")
 
 class Brand(models.Model):
     name =models.CharField(max_length=200)
