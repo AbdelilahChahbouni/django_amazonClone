@@ -17,5 +17,6 @@ class ProductDetails(DetailView):
 		return context 
 
 
-
+class BrandList(ListView):
+	model = Brand 
 
