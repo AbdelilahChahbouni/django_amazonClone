@@ -3,6 +3,23 @@ from django.views.generic import ListView , DetailView
 from .models import Product , Brand , ProductsImages , Review
 # Create your views here.
 
+def query_set(request):
+	#data = Product.objects.select_related("brand").all()
+	#data = Product.objects.filter(price__gt=30)
+	#data = Product.objects.filter(price__lt=30)
+	#data = Product.objects.filter(price__gte=30)
+	#data = Product.objects.filter(price__lte=30)
+	#data = Product.objects.filter(price = 30)
+	data = Product.objects.filter(price__range=(30 , 50))
+	context = {
+		'data' : data
+	}
+	return render(request , "product/debug.html" , context)
+
+
+
+
+
 
 class ProductList(ListView):
 	model = Product
