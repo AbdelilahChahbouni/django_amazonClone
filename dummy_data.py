@@ -41,7 +41,7 @@ def seed_product(number):
 			subtitle = fake.text(max_nb_chars=500),
 			description = fake.text(max_nb_chars=1000),
 			quantity = random.randint(0 , 50),
-			brand = Brand.objects.get(id = random.randint(1 , 200))
+			brand = Brand.objects.get(id = random.randint(2 , 1000))
 			)
 
 
