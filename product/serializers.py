@@ -52,15 +52,11 @@ class ProductDetailSerializer(serializers.ModelSerializer):
 		review_count = product.product_review.all().count()
 		return review_count
 
-
-
-
 class BrandDetailSerializer(serializers.ModelSerializer):
 	products = ProductListSerializer(source = "product_brand" , many= True)
 	class Meta:
 		model = Brand
 		fields = "__all__"
-
 
 class BrandListSerializer(serializers.ModelSerializer):
 	class Meta:
