@@ -6,6 +6,7 @@ from rest_framework import filters
 #from rest_framework.response import Response
 from rest_framework import generics
 from .my_custom_filters import ProductFilters
+from .custom_pagination import CustomPagination
 
 #@api_view(['GET'])
 #def product_list_api(request):
@@ -31,6 +32,7 @@ class ProductListAPI(generics.ListCreateAPIView):
 	search_fields = ['name', 'subtitle','description']
 	ordering_fields = ['price', 'quantity']
 	filterset_class = ProductFilters
+	pagination_class = CustomPagination
 
 
 class ProductDetailAPI(generics.RetrieveUpdateDestroyAPIView):
