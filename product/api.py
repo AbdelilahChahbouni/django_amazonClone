@@ -5,6 +5,7 @@ from rest_framework import filters
 #from rest_framework.decorators import api_view
 #from rest_framework.response import Response
 from rest_framework import generics
+from .my_custom_filters import ProductFilters
 
 #@api_view(['GET'])
 #def product_list_api(request):
@@ -29,6 +30,7 @@ class ProductListAPI(generics.ListCreateAPIView):
 	filterset_fields = ['flag', 'brand']
 	search_fields = ['name', 'subtitle','description']
 	ordering_fields = ['price', 'quantity']
+	filterset_class = ProductFilters
 
 
 class ProductDetailAPI(generics.RetrieveUpdateDestroyAPIView):
