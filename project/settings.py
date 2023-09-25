@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'taggit',
     "debug_toolbar",
     'rest_framework',
+    'django_filters',
     'product',
     'settings'
     
