@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     'rest_framework',
     'django_filters',
+    'rest_framework.authtoken',
     'product',
     'settings'
     
@@ -37,7 +38,7 @@ INSTALLED_APPS = [
 
 INTERNAL_IPS = [
     # ...
-    "127.0.0.1",
+    "127.0.0.2",
     # ...
 ]
 
@@ -134,6 +135,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 REST_FRAMEWORK = {
+     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 30
 }
