@@ -5,12 +5,18 @@ from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
 from django.utils.text import slugify
 from django.db.models import Avg 
+from datetime import datetime
+from django.utils.deconstruct import deconstructible
 # Create your models here.
 
 FLAG_TYPES = (('sale', 'sale'),
               ('New','New'),
               ('Feature','Feature'),
               )
+
+
+
+
 
 
 
@@ -73,13 +79,14 @@ class Brand(models.Model):
 
 
 
+
 class Review(models.Model):
     user = models.ForeignKey(User , verbose_name=_('user'),related_name="review_user" , on_delete=models.SET_NULL , null= True)
     product = models.ForeignKey(Product , verbose_name=_('product'),related_name='product_review' , on_delete=models.CASCADE)
     rate = models.IntegerField(_('rate'))
     review = models.CharField(_('review'),max_length=200)
-    created_at = models.DateTimeField(_('created at'),default=timezone.now())
-
+    created_at = models.DateTimeField(_('created at'),default=timezone.now)
+    
     def __str__(self):
         return str(self.user)
 

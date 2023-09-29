@@ -20,4 +20,20 @@ Product:
     - tags
     - description
     - related items
-    -  
+
+orders:
+    - code 
+    - order time
+    - delivery time
+    - address
+    - discount 
+    - totals products
+    - delivery fee
+    - status [ Recieved , Processed , Shipped , Delivered ]
+    - Products :
+        - name
+        - image 
+        - price 
+        - quantity
+        - brand
+        

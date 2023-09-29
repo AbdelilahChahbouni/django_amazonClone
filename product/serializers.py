@@ -37,7 +37,7 @@ class ProductDetailSerializer(TaggitSerializer ,serializers.ModelSerializer):
 	brand = serializers.StringRelatedField()
 	rate_avg = serializers.SerializerMethodField()
 	reviews_count = serializers.SerializerMethodField()
-	reviews = ReviewsSerializer(source = "product_review" , many= True)
+	reviews = ReviewsSerializer(source ="product_review" , many= True)
 	tags = TagListSerializerField()
 	class Meta:
 		model = Product
