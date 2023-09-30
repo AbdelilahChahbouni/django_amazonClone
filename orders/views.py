@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from .models import Order , Cart , CartDetail , Order , OrderDetail
 
@@ -6,7 +8,7 @@ from .models import Order , Cart , CartDetail , Order , OrderDetail
 # Create your views here.
 
 
-class OrderList(ListView):
+class OrderList(LoginRequiredMixin,ListView):
 	model = Order
 	paginate_by = 10
 
@@ -15,7 +17,7 @@ class OrderList(ListView):
 
 		return queryset
 
-
+@login_required
 def checkout(request):
 	cart = Cart.objects.get(user=request.user)
 	cart_detail = CartDetail.objects.filter(cart=cart)
