@@ -15,6 +15,13 @@ class Cart(models.Model):
 	def __str__(self):
 		return str(self.user)
 
+	def cart_total(self):
+		total = 0
+		for item in self.cart_detail.all():
+			total += item.total_price
+		return round(total,2)
+
+
 class CartDetail(models.Model):
 	cart = models.ForeignKey(Cart , related_name='cart_detail' , on_delete=models.CASCADE)
 	product = models.ForeignKey(Product , related_name="cart_product" , on_delete=models.SET_NULL,null=True,blank=True)
@@ -23,6 +30,11 @@ class CartDetail(models.Model):
 
 	def __str__(self):
 		return str(self.cart)
+
+
+
+
+
 
 ORDER_STAUS = (("Recieved" , "Recieved"),("Processed" , "Processed"),("Shipped" , "Shipped"),("Delivered" , "Delivered"))
 
@@ -40,7 +52,7 @@ class Order(models.Model):
 
 
 class OrderDetail(models.Model):
-	cart = models.ForeignKey(Cart , related_name='order_detail' , on_delete=models.CASCADE)
+	cart = models.ForeignKey(Order , related_name='order_detail' , on_delete=models.CASCADE)
 	product = models.ForeignKey(Product , related_name="order_product" , on_delete=models.SET_NULL,null=True,blank=True)
 	price = models.FloatField()
 	quantity = models.IntegerField()

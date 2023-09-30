@@ -12,3 +12,5 @@ def get_or_create_cart(request):
 
 	else:
 		return {}
+
+		
