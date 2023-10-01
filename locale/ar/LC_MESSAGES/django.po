@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-01 09:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: product/models.py:25 product/models.py:66
+msgid "name"
+msgstr ""
+
+#: product/models.py:26
+msgid "flag"
+msgstr "ﺭﺎﻌﺷ"
+
+#: product/models.py:27 product/models.py:57 product/models.py:67
+msgid "image"
+msgstr "ﺓﺭﻮﺼﻟا"
+
+#: product/models.py:28
+msgid "price"
+msgstr "ﻦﻤﺘﻟا"
+
+#: product/models.py:29
+msgid "sku"
+msgstr "ﻲﻠﺴﻠﺴﺗ ﻢﻗﺭ"
+
+#: product/models.py:30
+msgid "subtitle"
+msgstr "ﺮﻴﺼﻗ ﻒﺻﻭ"
+
+#: product/models.py:31
+msgid "description"
+msgstr "ﻒﺻﻮﻟا"
+
+#: product/models.py:32
+msgid "quantity"
+msgstr "ﺔﻴﻤﻜﻟا"
+
+#: product/models.py:33
+msgid "brand"
+msgstr "ﻉﺮﻔﻟا"
+
+#: product/models.py:56 product/models.py:85
+msgid "product"
+msgstr "ﺞﺘﻨﻤﻟا"
+
+#: product/models.py:84
+msgid "user"
+msgstr "ﻞﻤﻌﺘﺴﻤﻟا"
+
+#: product/models.py:86
+msgid "rate"
+msgstr "ﺪﺤﻟا"
+
+#: product/models.py:87
+msgid "review"
+msgstr "ﻢﻴﻘﺘﻟا"
+
+#: product/models.py:88
+msgid "created at"
+msgstr "ﻲﻓ ﺖﺌﺸﻧﺃ"
+
+#: templates/base.html:163
+msgid "home"
+msgstr "الصفحة الرئيسية"
+
+#: templates/base.html:167
+msgid "shop"
+msgstr "التسوق"
+
+#: templates/base.html:171
+#, fuzzy
+#| msgid "brand"
+msgid "Brands"
+msgstr "الفروع"
+
+#: templates/base.html:175
+msgid "orders"
+msgstr "الطلبات"

@@ -1,6 +1,10 @@
+{% load i18n %}
 {% load static %}
+{% get_current_language as LANGUAGE_CODE %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" {% if LANGUAGE_CODE == "ar" %} dir="rtl" {% endif %} >
+
     <head>
         <!--=====================================
                     META TAG PART START
@@ -30,20 +34,26 @@
         =======================================-->
         <!-- FAVICON -->
         <link rel="icon" href="images/favicon.png">
-
-        <!-- FONTS -->
+        {% if LANGUAGE_CODE == "en" %}
         <link rel="stylesheet" href="{% static 'en/fonts/flaticon/flaticon.css' %}">
         <link rel="stylesheet" href="{% static 'en/fonts/icofont/icofont.min.css' %}">
         <link rel="stylesheet" href="{% static 'en/fonts/fontawesome/fontawesome.min.css'%}">
-
-        <!-- VENDOR -->
         <link rel="stylesheet" href="{% static 'en/vendor/venobox/venobox.min.css' %}">
         <link rel="stylesheet" href="{% static 'en/vendor/slickslider/slick.min.css' %}">
         <link rel="stylesheet" href="{% static 'en/vendor/niceselect/nice-select.min.css' %}">
         <link rel="stylesheet" href="{% static 'en/vendor/bootstrap/bootstrap.min.css' %}">
-
-        <!-- CUSTOM -->
         <link rel="stylesheet" href="{% static 'en/css/main.css' %}">
+        {% else %}
+        <link rel="stylesheet" href="{% static 'ar/fonts/flaticon/flaticon.css' %}">
+        <link rel="stylesheet" href="{% static 'ar/fonts/icofont/icofont.min.css' %}">
+        <link rel="stylesheet" href="{% static 'ar/fonts/fontawesome/fontawesome.min.css'%}">
+        <link rel="stylesheet" href="{% static 'ar/vendor/venobox/venobox.min.css' %}">
+        <link rel="stylesheet" href="{% static 'ar/vendor/slickslider/slick.min.css' %}">
+        <link rel="stylesheet" href="{% static 'ar/vendor/niceselect/nice-select.min.css' %}">
+        <link rel="stylesheet" href="{% static 'ar/vendor/bootstrap/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'ar/css/main.css' %}">
+        {% endif %}
+
         {% block css_file %}
             <link rel="stylesheet" href="{% static 'en/css/index.css' %}">
         {% endblock %}
@@ -70,11 +80,21 @@
                         <div class="header-top-select">
                             <div class="header-select">
                                 <i class="icofont-world"></i>
-                                <select class="select">
-                                    <option value="english" selected>english</option>
-                                    <option value="bangali">bangali</option>
-                                    <option value="arabic">arabic</option>
-                                </select>
+
+                                <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                                    <input name="next" type="hidden" value="{{ redirect_to }}">
+                                    <select name="language" class="select">
+                                        {% get_current_language as LANGUAGE_CODE %}
+                                        {% get_available_languages as LANGUAGES %}
+                                        {% get_language_info_list for LANGUAGES as languages %}
+                                    {% for language in languages %}
+                                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                                    {{ language.name_local }} ({{ language.code }})
+                                    </option>
+                                    {% endfor %}
+                                    </select>
+                                    <input type="submit" value="Go">
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -148,19 +168,19 @@
                         <div class="navbar-content">
                             <ul class="navbar-list">
                                 <li class="navbar-item ">
-                                    <a class="navbar-link" href="/">home</a>
+                                    <a class="navbar-link" href="/"> {% translate "home" %}</a>
 
                                 </li>
                                 <li class="navbar-item ">
-                                    <a class="navbar-link" href="/products">shop</a>
+                                    <a class="navbar-link" href="/products">{% translate "shop" %}</a>
                                   
                                 </li>
                                 <li class="navbar-item ">
-                                    <a class="navbar-link " href="/products/brands/">Brands</a>
+                                    <a class="navbar-link " href="/products/brands/">{% translate "Brands" %}</a>
                                     
                                 </li>
                                 <li class="navbar-item ">
-                                    <a class="navbar-link " href="/orders">Orders</a>
+                                    <a class="navbar-link " href="/orders">{% translate "orders" %}</a>
                                    
                                 </li>
                               
