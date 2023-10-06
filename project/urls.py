@@ -23,14 +23,18 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+#app_name = "orders"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('' , include('settings.urls')),
     path('products/' , include('product.urls')),
-    path('orders/' , include('orders.urls')),
+    path('orders/' , include('orders.urls', namespace='orders')),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path("i18n/", include("django.conf.urls.i18n")),
+    path('rosetta/', include('rosetta.urls')),
+    
 
 ]
 
