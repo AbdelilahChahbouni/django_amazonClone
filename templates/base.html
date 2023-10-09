@@ -383,7 +383,7 @@
                         <li class="cart-item">
                             <div class="cart-media">
                                 <a href="#"><img src="{{ item.product.image.url }}"></a>
-                                <a class="cart-delete" href="/orders/{{item.id}}/remove_from_cart"><i class="far fa-trash-alt"></i></a>
+                                <button class="cart-delete" ><a href="/orders/{{item.id}}/remove_from_cart"></a><i class="far fa-trash-alt"></i></button>
                             </div>
                             <div class="cart-info-group">
                                 <div class="cart-info">
@@ -409,7 +409,7 @@
                     <input type="text" placeholder="Enter your coupon code">
                     <button type="submit"><span>apply</span></button>
                 </form>
-                <a class="cart-checkout-btn" href="checkout.html">
+                <a class="cart-checkout-btn" href="/orders/checkout/">
                     <span class="checkout-label">Proceed to Checkout</span>
                     <span class="checkout-price">${{ cart_data.cart_total }}</span>
                 </a>
