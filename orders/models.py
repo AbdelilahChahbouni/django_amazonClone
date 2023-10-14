@@ -11,6 +11,8 @@ CART_STAUS = (('InProgress' , 'InProgress' ),( 'Completed' , 'Completed' ))
 class Cart(models.Model):
     user = models.ForeignKey(User,related_name="user_cart",on_delete=models.SET_NULL,null=True,blank=True)
     status_cart = models.CharField(max_length=10,choices=CART_STAUS)
+    coupon = models.ForeignKey('Coupon' , related_name='cart_coupon' , on_delete=models.SET_NULL , null=True,blank=True)
+    total_after_coupon = models.FloatField(null=True,blank=True)
 
     def __str__(self):
         return str(self.user)
@@ -54,14 +56,14 @@ class Order(models.Model):
 
 
 class OrderDetail(models.Model):
-    cart = models.ForeignKey(Order , related_name='order_detail' , on_delete=models.CASCADE)
+    order = models.ForeignKey(Order , related_name='order_detail' , on_delete=models.CASCADE)
     product = models.ForeignKey(Product , related_name="order_product" , on_delete=models.SET_NULL,null=True,blank=True)
     price = models.FloatField()
     quantity = models.IntegerField()
     total_price = models.FloatField(null=True,blank=True)
 
     def __str__(self):
-        return str(self.cart)
+        return str(self.order)
 
 
 class Coupon(models.Model):
