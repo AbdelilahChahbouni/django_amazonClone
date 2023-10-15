@@ -2,9 +2,10 @@ from rest_framework import generics
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from .models import Cart , CartDetail , Order , OrderDetail
+from .models import Cart , CartDetail , Order , OrderDetail , Coupon
 from product.models import Product 
 from .serializers import CartSerializer , OrderListSerializer , OrderDetailSerializer
+import datetime
 
 
 
@@ -104,8 +105,33 @@ class CreateOrderAPI(generics.GenericAPIView):
 
 
 
-class AplayCouponAPI():
- pass 
+class AplayCouponAPI(generics.GenericAPIView):
+  def post(self , request , *args , **kwargs):
+    user = User.objects.get(username=self.kwargs["username"])
+    cart = Cart.objects.get(user=user , status_cart = "InProgress")
+    coupon = get_object_or_404(Coupon , code=request.data["coupon_code"])
+
+    if coupon and coupon.quantity > 0 :
+     today_date = datetime.datetime.today().date()
+     #today_date = datetime.datetime.combine(datetime.date.today(), datetime.datetime.min.time())
+     
+     if today_date >= datetime.datetime.date((coupon.start_date)) and datetime.datetime.date((coupon.end_time)):
+        coupon_value = cart.cart_total() * coupon.discount / 100
+        cart_total = cart.cart_total() - coupon_value
+        coupon.quantity -= 1
+        coupon.save()
+        cart.coupon = coupon
+        cart.total_after_coupon = cart_total
+        cart.save()
+        return Response({"message":"the coupon aplied succssefully"})
+     else:
+      return Response({"message":"the date of coupon expired"})
+    else:
+     return Response({"message":"the Coupon is not valid"})
+
+
+
+     
 
 
 

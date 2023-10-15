@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from product.models import Product 
 from utils import generate_code
+import datetime
 
 # Create your models here.
 
@@ -21,7 +22,7 @@ class Cart(models.Model):
         total = 0
         for item in self.cart_detail.all():
             total += item.total_price
-        
+        return total    
 
 
 class CartDetail(models.Model):
@@ -80,4 +81,4 @@ class Coupon(models.Model):
 
         week = datetime.timedelta(days=7)
         self.end_time = self.start_date + week
-        super(coupon, self).save(*args , **kwargs)
+        super(Coupon, self).save(*args , **kwargs)
