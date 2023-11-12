@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'taggit',
-    "debug_toolbar",
+    'debug_toolbar',
     'rest_framework',
     'django_filters',
     'rest_framework.authtoken',
@@ -49,7 +49,7 @@ INSTALLED_APPS = [
 
 INTERNAL_IPS = [
     # ...
-    "127.0.0.2",
+    "127.0.0.1",
     # ...
 ]
 
@@ -62,7 +62,7 @@ MIDDLEWARE = [
     "django.middleware.locale.LocaleMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'allauth.account.middleware.AccountMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -171,4 +171,11 @@ REST_FRAMEWORK = {
     'JWT_AUTH_COOKIE': 'jwt-auth',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 30
+}
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    }
 }

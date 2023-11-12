@@ -3,8 +3,9 @@ from django.views.generic import ListView , DetailView
 from .models import Product , Brand , ProductsImages , Review
 from django.db.models import Q , F , Value
 from django.db.models.aggregates import Min , Max , Sum , Count , Avg 
+from django.views.decorators.cache import cache_page
 # Create your views here.
-
+@cache_page(60 * 2)
 def query_set(request):
 	#data = Product.objects.select_related("brand").all()
 	#data = Product.objects.filter(price__gt=30)
@@ -79,8 +80,8 @@ def query_set(request):
 	# annotate
 
 	#data = Product.objects.annotate(is_new=Value(True))
-	data = Product.objects.annotate(price_tax=F("price") * 1.5)
-
+	#data = Product.objects.annotate(price_tax=F("price") * 1.5)
+	data = Product.objects.all()
 	context = {
 		'data' : data
 	}

@@ -7,9 +7,11 @@
 	<body>  
 
 		<h2>Debug Page in Django</h2>
+		{% for item in data %}
 		<ul>
-			<li>{{data}}</li>
+			<li>{{item.brand}}</li>
 		</ul>
+		{% endfor %}
 
 	</body>	
 
