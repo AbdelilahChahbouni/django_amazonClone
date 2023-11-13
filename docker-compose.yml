@@ -1,0 +1,16 @@
+version: "2"
+
+services:
+  backend:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    ports: 
+      - "8000:8000"
+    container_name: dj_container
+
+  redis:
+    image: redis:7.2.3-alpine3.18
+    container_name: redis-server
+
+
+    
