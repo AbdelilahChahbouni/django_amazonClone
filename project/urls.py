@@ -23,12 +23,12 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-#app_name = "orders"
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('' , include('settings.urls')),
-    path('products/' , include('product.urls')),
+    path('products/' , include('product.urls', namespace='products')),
     path('orders/' , include('orders.urls', namespace='orders')),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
@@ -38,5 +38,16 @@ urlpatterns = [
 
 ]
 
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += [
+        path(r'^__debug__/', include(debug_toolbar.urls)),
+    ]
+
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+

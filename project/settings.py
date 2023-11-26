@@ -173,17 +173,17 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 30
 }
 
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": 'redis://redis:6379/0',
-    }
-}
+#CACHES = {
+    #"default": {
+       # "BACKEND": "django.core.cache.backends.redis.RedisCache",
+       # "LOCATION": 'redis://redis:6379/0',
+    #}
+#}
 
 # the redis run from localhost 
 #CELERY_BROKER_URL = 'redis://localhost:6379/0'
 #CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 # the redis run from doker image
-CELERY_BROKER_URL = 'redis://redis:6379/0'
-CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+#CELERY_BROKER_URL = 'redis://redis:6379/0'
+#CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
