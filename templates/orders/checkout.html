@@ -74,30 +74,14 @@
                                 </div>
                                 <div class="chekout-coupon">
                                     <button class="coupon-btn">Do you have a coupon code?</button>
-                                    <form class="coupon-form">
-                                        <input type="text" placeholder="Enter your coupon code">
+                                    <form class="coupon-form" method="post" id="apply-coupon">
+                                        {% csrf_token %}
+                                        <input type="text" name="coupon_code" placeholder="Enter your coupon code">
                                         <button type="submit"><span>apply</span></button>
                                     </form>
                                 </div>
                                 <div class="checkout-charge">
-                                    <ul>
-                                        <li>
-                                            <span>Sub total</span>
-                                            <span>$267.45</span>
-                                        </li>
-                                        <li>
-                                            <span>delivery fee</span>
-                                            <span>$10.00</span>
-                                        </li>
-                                        <li>
-                                            <span>discount</span>
-                                            <span>$00.00</span>
-                                        </li>
-                                        <li>
-                                            <span>Total<small>(Incl. VAT)</small></span>
-                                            <span>$277.00</span>
-                                        </li>
-                                    </ul>
+                                    {% include "include/checkout_table.html" %}
                                 </div>
                             </div>
                         </div>

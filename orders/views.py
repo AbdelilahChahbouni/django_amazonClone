@@ -2,8 +2,11 @@ from django.shortcuts import render , redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
-from .models import Order , Cart , CartDetail , Order , OrderDetail
+from .models import Order , Cart , CartDetail , Order , OrderDetail , Coupon
 from product.models import Product
+import datetime
+from django.shortcuts import get_object_or_404
+from settings.models import deliveryFee
 
 
 # Create your views here.
@@ -41,7 +44,50 @@ def remove_from_cart(request , id):
 def checkout(request):
 	cart = Cart.objects.get(user=request.user)
 	cart_detail = CartDetail.objects.filter(cart=cart)
+	fee_value = deliveryFee.objects.last().fee
 
-	return render(request , "orders/checkout.html" , {"cart_data": cart_detail})
+
+	if request.method=="POST":
+		coupon = get_object_or_404(Coupon , code=request.POST["coupon_code"])
+		total = None
+		cart_sub_total=None
+		if coupon and coupon.quantity > 0 :
+			today_date = datetime.datetime.today().date()
+			if today_date >= datetime.datetime.date((coupon.start_date)) and datetime.datetime.date((coupon.end_time)):
+				coupon_value = cart.cart_total() * coupon.discount / 100
+				cart_total = cart.cart_total() - coupon_value
+				coupon.quantity -= 1
+				coupon.save()
+				cart.coupon = coupon
+				cart.total_after_coupon = cart_total
+				cart.save()
+				total = fee_value + cart_total
+
+				
+				cart = Cart.objects.get(user=request.user , status_cart = "InProgress")
+
+				return render(request,"orders/checkout.html" ,{
+
+					"cart_data": cart_detail,
+					"cart_sub_total": cart_total,
+					"cart_total": total,
+					"coupon": coupon_value,
+					"fee_value":fee_value,
+							} )
+			
+	else:
+		cart_sub_total= cart.cart_total()
+		total = fee_value + cart.cart_total()
+		coupon = 0
+
+
+	return render(request , "orders/checkout.html" ,{
+
+					"cart_data": cart_detail,
+					"cart_sub_total": cart_sub_total,
+					"cart_total": total,
+					"coupon": coupon,
+					"fee_value":fee_value,
+							})
 
 	
