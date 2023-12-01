@@ -1,6 +1,7 @@
 
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -109,12 +110,26 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+#DATABASES = {
+    #'default': {
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+    #}
+#}
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'mydb',
+        'USER': 'postgres',
+        'PASSWORD':'postgres',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
+
+
+
+
 
 
 # Password validation
@@ -187,5 +202,5 @@ REST_FRAMEWORK = {
 #CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 # the redis run from doker image
-#CELERY_BROKER_URL = 'redis://redis:6379/0'
-#CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
