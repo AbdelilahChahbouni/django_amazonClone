@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'settings',
     'orders',
     'drf_yasg',
+    'bootstrap5'
 
     
 ]
@@ -210,3 +211,5 @@ CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
 # login with email
 
 AUTHENTICATION_BACKENDS = ['accounts.backends.EmailOrUsernameModelBackend']
+LOGIN_REDIRECT_URL = '/'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
