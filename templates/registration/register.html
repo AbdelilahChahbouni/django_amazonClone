@@ -1,4 +1,5 @@
 {% extends 'base_auth.html' %}
+{% load bootstrap5 %}
 
 {% block content %}
 <section class="user-form-part">
@@ -6,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-12 col-sm-10 col-md-12 col-lg-12 col-xl-10">
                 <div class="user-form-logo">
-                    <a href="index.html"><img src="images/logo.png" alt="logo"></a>
+                    <a href="index.html"><img src="{{ company_info.logo.url }}" alt="logo"></a>
                 </div>
                 <div class="user-form-card">
                     <div class="user-form-title">
@@ -37,13 +38,11 @@
                     <p>Don't have any account?<a href="{% url 'login' %}">register here</a></p>
                 </div>
                 <div class="user-form-footer">
-                    <p>Greeny | &COPY; Copyright by <a href="#">Mironcoder</a></p>
+                    <p>Greeny | &COPY; Copyright by <a href="#">{{ company_info.name }}</a></p>
                 </div>
             </div>
         </div>
     </div>
 </section>
         
-                    JS LINK PART START
-        =======================================-->
-{ endblock content }
+{% endblock content %}
