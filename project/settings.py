@@ -3,6 +3,11 @@ from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -13,7 +18,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-rs(7rxl8-5v1abr2j^fi@+i2%v@nk-)ta($8#8+!bm8ua)x51+'
+#SECRET_KEY = 'django-insecure-rs(7rxl8-5v1abr2j^fi@+i2%v@nk-)ta($8#8+!bm8ua)x51+'
+ 
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -220,10 +227,16 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "dev4testemail@gmail.com"
-EMAIL_HOST_PASSWORD = "yxmggrrtjnkrdzmb"
+#EMAIL_HOST_USER = "dev4testemail@gmail.com"
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+#EMAIL_HOST_PASSWORD = "yxmggrrtjnkrdzmb"
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 
+#STRIP_PUPLISHABLE_KEY = "pk_test_51OLpcrIfEEKURJ0GJfNj5PywEh3NOFckOOXx9jKvyFxIw4uI0GFCfmTor4XWdsX9x4gfACMRWnZAdzRoVOCYp6kq00yLA1RiGz"
+#STRIP_SECRET_KEY = "sk_test_51OLpcrIfEEKURJ0GDnL4QoND67ST5zWZW1M62oI5P5OpWAQpxdGGkMqtbmlvkKqfxohg4tA12gq8GdwpEGSXgCHF00nXW4wFGd"
 
-STRIP_PUPLISHABLE_KEY = "pk_test_51OLpcrIfEEKURJ0GJfNj5PywEh3NOFckOOXx9jKvyFxIw4uI0GFCfmTor4XWdsX9x4gfACMRWnZAdzRoVOCYp6kq00yLA1RiGz"
-STRIP_SECRET_KEY = "sk_test_51OLpcrIfEEKURJ0GDnL4QoND67ST5zWZW1M62oI5P5OpWAQpxdGGkMqtbmlvkKqfxohg4tA12gq8GdwpEGSXgCHF00nXW4wFGd"
+STRIP_PUPLISHABLE_KEY = os.getenv('STRIP_PUPLISHABLE_KEY')
+STRIP_SECRET_KEY = os.getenv('STRIP_SECRET_KEY')
+
+
